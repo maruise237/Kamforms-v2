@@ -1,0 +1,76 @@
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+#  Kamforms — .gitignore (web + mobile)
+# ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+# ─── Dependencies ─────────────────────────────────────────────────────────
+node_modules/
+.pnp
+.pnp.js
+.yarn/cache
+.yarn/install-state.gz
+
+# ─── Build / Dist artifacts ──────────────────────────────────────────────
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+.expo/
+.expo-shared/
+web-build/
+/uploads/
+
+# ─── Logs ────────────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+logs/
+
+# ─── Environment variables (NEVER commit secrets) ────────────────────────
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+mobile/.env
+.env.development
+
+# ─── IDE / Editor ────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+*.orig
+
+# ─── Mobile / Expo specifics ────────────────────────────────────────────
+mobile/.expo/
+mobile/.eas/
+mobile/.eas/credentials/
+mobile/dist/
+mobile/web-build/
+mobile/credentials/
+mobile/*.keystore
+mobile/*.jks
+mobile/*.p8
+mobile/*.cer
+mobile/*.mobileprovision
+mobile/GoogleService-Info.plist.bak
+mobile/google-services.json.bak
+
+# ─── Coverage / Tests ────────────────────────────────────────────────────
+coverage/
+.nyc_output/
+*.lcov
+
+# ─── Misc ────────────────────────────────────────────────────────────────
+.cache/
+.turbo/
+.vercel/
+*.pem
+*.key
+.DS_Store
+.history/

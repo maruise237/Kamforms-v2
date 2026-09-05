@@ -1,0 +1,3 @@
+ALTER TABLE "Form" ADD COLUMN "notificationsEnabled" BOOLEAN NOT NULL DEFAULT true;
+ALTER TABLE "Form" ADD COLUMN "maxSubmissions" INTEGER;
+ALTER TABLE "Form" ADD COLUMN "expiresAt" TIMESTAMP(3);

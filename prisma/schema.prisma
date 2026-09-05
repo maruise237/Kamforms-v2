@@ -1,0 +1,91 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                String   @id
+  whatsappNumber    String?
+  notificationEmail String?
+  plan              String   @default("free")
+  billingStatus     String   @default("free")
+  billingPeriod     String?
+  billingPlanId     String?
+  billingReference  String?
+  planActivatedAt   DateTime?
+  planExpiresAt     DateTime?
+  forms             Form[]
+  usageEvents       UsageEvent[]
+  mobilePushTokens  MobilePushToken[]
+  pushSubscription        Json?
+  onboardingWelcomeSent  Boolean  @default(false)
+  onboardingCompleted    Boolean  @default(false)
+  onboardingUsage        String?
+  onboardingActivity     String?
+  onboardingStep         Int      @default(0)
+  createdAt               DateTime @default(now())
+}
+
+model Form {
+  id          String       @id @default(cuid())
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String
+  description String?
+  slug        String       @unique
+  schema      Json
+  theme       Json?
+  ending      Json?
+  active                Boolean      @default(true)
+  notificationsEnabled  Boolean      @default(true)
+  notificationMode      String       @default("every")
+  assignedWhatsapp      String?
+  assignedEmail         String?
+  maxSubmissions        Int?
+  expiresAt             DateTime?
+  submissions           Submission[]
+  createdAt             DateTime     @default(now())
+  updatedAt             DateTime     @updatedAt
+
+  @@index([userId])
+  @@index([userId, createdAt])
+}
+
+model Submission {
+  id        String   @id @default(cuid())
+  formId    String
+  form      Form     @relation(fields: [formId], references: [id], onDelete: Cascade)
+  data      Json
+  createdAt DateTime @default(now())
+
+  @@index([formId])
+  @@index([formId, createdAt])
+}
+
+model UsageEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  formId    String?
+  type      String
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+
+  @@index([userId, type, createdAt])
+  @@index([formId])
+}
+
+model MobilePushToken {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   @unique
+  platform  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}

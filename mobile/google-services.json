@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "108158580720",
+    "project_id": "studied-triode-453504-u5",
+    "storage_bucket": "studied-triode-453504-u5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:108158580720:android:c26d8654de894ce87b0f35",
+        "android_client_info": {
+          "package_name": "com.kamtech.kamforms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "108158580720-j84rt8cqmeer36aluvgamg5o8nqo4ha7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyALITYW6CLWg85FuTTGwOV9PLuVXRPJg60"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "108158580720-j84rt8cqmeer36aluvgamg5o8nqo4ha7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

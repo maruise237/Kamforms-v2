@@ -1,0 +1,103 @@
+# Kamforms
+> Collecte structurée pour groupes WhatsApp avec génération IA, formulaires privés et notifications WhatsApp instantanées. Pensé pour les PME africaines. Support Orange Money, MTN Mobile Money, Wave.
+
+## Docs & support
+- Kamforms: https://kamforms.com
+- Documentation: https://kamtech.online
+- Contact: contact@kamtech.online
+
+## Pages principales
+- Accueil: https://kamforms.com
+- Fonctionnalités: https://kamforms.com/fonctionnalites
+- Tarifs (FCFA/USD): https://kamforms.com/tarifs
+- Alternative à Google Forms: https://kamforms.com/alternative-a-google-forms
+- Comparatifs: https://kamforms.com/comparatif
+- Études de cas: https://kamforms.com/etudes-de-cas
+- Blog: https://kamforms.com/blog
+- À propos: https://kamforms.com/a-propos
+- Contact: https://kamforms.com/contact
+- Politique de confidentialité: https://kamforms.com/privacy
+- Conditions d'utilisation: https://kamforms.com/terms
+
+## Pages pays (formulaires WhatsApp par pays africain)
+- Côte d'Ivoire: https://kamforms.com/pays/cote-d-ivoire
+- Sénégal: https://kamforms.com/pays/senegal
+- Cameroun: https://kamforms.com/pays/cameroun
+- Mali: https://kamforms.com/pays/mali
+- Burkina Faso: https://kamforms.com/pays/burkina-faso
+- Togo: https://kamforms.com/pays/togo
+- Bénin: https://kamforms.com/pays/benin
+- Niger: https://kamforms.com/pays/niger
+- Guinée: https://kamforms.com/pays/guinee
+- Centrafrique: https://kamforms.com/pays/rca
+
+## Blog : Formulaires WhatsApp
+- Formulaire WhatsApp pour PME Afrique: https://kamforms.com/blog/formulaire-whatsapp-pme-afrique
+- Formulaire de commande WhatsApp pour commerçants: https://kamforms.com/blog/formulaire-commande-whatsapp-commerce
+- Formulaire d'inscription WhatsApp pour formations: https://kamforms.com/blog/formulaire-inscription-whatsapp-formation
+- Formulaire de devis WhatsApp pour freelances: https://kamforms.com/blog/formulaire-devis-whatsapp-freelance
+- Sondage WhatsApp pour collecter les avis clients: https://kamforms.com/blog/sondage-whatsapp-collecte-avis
+- Formulaire multi-étapes : +40% de complétion: https://kamforms.com/blog/formulaire-multi-etapes-taux-completion
+- Notifications WhatsApp instantanées: https://kamforms.com/blog/notifications-whatsapp-formulaires
+
+## Blog : Mobile Money
+- Accepter Orange Money dans un formulaire: https://kamforms.com/blog/paiement-orange-money-formulaire
+- Guide Mobile Money pour PME africaines 2026: https://kamforms.com/blog/guide-mobile-money-pme-afrique
+
+## Blog : Alternatives et comparatifs
+- Typeform vs Kamforms : comparatif 2026: https://kamforms.com/blog/typeform-vs-kamforms-comparatif
+- Google Forms vs Kamforms : lequel choisir: https://kamforms.com/blog/google-forms-vs-kamforms-2026
+
+## Blog : Intelligence Artificielle
+- Génération de formulaire IA : guide complet: https://kamforms.com/blog/generation-formulaire-ia-guide
+- 10 meilleurs prompts IA pour formulaires: https://kamforms.com/blog/meilleurs-prompts-ia-formulaire
+- Comment l'IA transforme la collecte de données en Afrique: https://kamforms.com/blog/ia-collecte-donnees-afrique-2026
+
+## Études de cas
+- Coach business à Abidjan : +300% de devis: https://kamforms.com/etudes-de-cas/coach-business-abidjan
+- Formateur à Dakar : inscription formation automatisée: https://kamforms.com/etudes-de-cas/formateur-dakar-inscriptions
+- Restaurant à Douala : commandes WhatsApp structurées: https://kamforms.com/etudes-de-cas/restaurant-douala-commandes
+
+## Comparatifs (Kamforms vs concurrents)
+- Kamforms vs Typeform: https://kamforms.com/comparatif/kamforms-vs-typeform
+- Kamforms vs Jotform: https://kamforms.com/comparatif/kamforms-vs-jotform
+- Kamforms vs Tally: https://kamforms.com/comparatif/kamforms-vs-tally
+- Kamforms vs Fillout: https://kamforms.com/comparatif/kamforms-vs-fillout
+- Kamforms vs WATI: https://kamforms.com/comparatif/kamforms-vs-wati
+- Kamforms vs Respond.io: https://kamforms.com/comparatif/kamforms-vs-respond-io
+- Kamforms vs Google Forms: https://kamforms.com/comparatif/kamforms-vs-google-forms
+- Kamforms vs ManyChat: https://kamforms.com/comparatif/kamforms-vs-manychat
+
+## Fonctionnalités clés
+- Génération IA de formulaires en 30 secondes (97% plus rapide que la création manuelle)
+- Notifications WhatsApp instantanées en moins de 5 secondes (30x plus rapide que l'email)
+- Paiements Mobile Money intégrés : Orange Money, MTN Mobile Money, Wave, T-Money, Moov Money
+- Import Google Forms en 1 clic (questions, options, logique conditionnelle)
+- Formulaires multi-étapes avec barre de progression (+40% de complétion)
+- Self-hosting disponible pour contrôle total des données
+- Export CSV des réponses
+- Personnalisation visuelle (couleurs, thème sombre, bannière)
+- Accès collaborateurs jusqu'à 20 utilisateurs
+- Logique conditionnelle avancée
+- Limite de réponses configurable
+- Pièces jointes dans les formulaires
+
+## Plans et tarifs (FCFA/USD)
+- Gratuit : fonctionnalités de base, notifications WhatsApp de test
+- Pro : 3 500 FCFA/mois (6$/mois) — notifications illimitées, logique conditionnelle, multi-étapes, IA
+- Business : 29 000 FCFA/mois (49$/mois) — jusqu'à 10 000 notifications/mois, 20 collaborateurs, self-hosting, support prioritaire
+
+## À propos
+Kamforms est un service de création de formulaires intelligents avec intégration WhatsApp native, développé par Kamtech (https://kamtech.online). Fondé par Mariuse Kamga, basé à Yaoundé, Cameroun. Conçu pour les PME africaines avec support des paiements Mobile Money. Plus de 69 pages optimisées SEO pour 10 pays africains.
+
+## Support Mobile Money par pays
+- Côte d'Ivoire : Orange Money, MTN Mobile Money, Wave
+- Sénégal : Orange Money, Wave
+- Cameroun : MTN Mobile Money, Orange Money
+- Mali : Orange Money, Moov Money
+- Burkina Faso : Orange Money, Moov Money
+- Togo : T-Money, Moov Money
+- Bénin : MTN Mobile Money
+- Niger : Orange Money
+- Guinée : Orange Money
+- Centrafrique : Orange Money, Moov Money
