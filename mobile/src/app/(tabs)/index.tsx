@@ -9,6 +9,7 @@ import { typography, radius } from "@/theme";
 import { useTheme } from "@/context/ThemeContext";
 import { formPublicUrl, listForms, cloneForm, deleteForm, type FormSummary } from "@/lib/api";
 import type { ThemeColors } from "@/theme";
+import { OfflineBanner } from "@/components/OfflineBanner";
 
 // ─── Carte formulaire mémoïsée (Phase 2.2) ──────────────────────────
 // La carte ne re-render que si les props changent (item + colors + handlers stables)
@@ -108,6 +109,8 @@ export default function FormsScreen() {
           <Text style={[styles.streakText, { color: colors.spark }]}>0 jour</Text>
         </View>
       </View>
+
+      <OfflineBanner />
 
       <FlatList
         data={listData}

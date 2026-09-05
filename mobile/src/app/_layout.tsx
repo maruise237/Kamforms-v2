@@ -2,6 +2,7 @@ import { useCallback, useEffect } from "react";
 import { Stack, useRouter } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import * as Notifications from "expo-notifications";
+import * as Linking from "expo-linking";
 import { StatusBar } from "expo-status-bar";
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { tokenCache } from "@clerk/clerk-expo/token-cache";
@@ -13,6 +14,7 @@ import { registerExpoToken } from "@/lib/api";
 import { dlog } from "@/lib/debugLog";
 import { kamformsFonts } from "@/lib/fonts";
 import { setupQueryCachePersistence, prefetchCriticalQueries } from "@/lib/queryCache";
+import { parseKamformsLink } from "@/lib/deepLinking";
 import * as SecureStore from "expo-secure-store";
 import {
   configureNotificationHandler,
@@ -146,6 +148,48 @@ function RootNavigator() {
     });
     return () => sub.remove();
   }, [router]);
+
+  // ─── Deep linking kamforms:// (Phase 3.7) ─────────────────────────
+  // Gestion des liens entrants : kamforms://form/[slug], kamforms://formulaire/[id],
+  // kamforms://reponses, kamforms://reponses/[formId]
+  useEffect(() => {
+    if (!isSignedIn) return;
+
+    const handleUrl = (url: string) => {
+      const parsed = parseKamformsLink(url);
+      switch (parsed.kind) {
+        case "formulaire":
+          router.push(`/formulaire/${parsed.id}` as never);
+          break;
+        case "reponses":
+          // Pour l'instant, on ouvre simplement l'onglet Réponses.
+          // Le filtrage par formId nécessiterait un paramètre de route — TODO V1.1.
+          router.push("/(tabs)/reponses" as never);
+          break;
+        case "form":
+          // Lien public : on l'ouvre dans le navigateur système (WebView non requis,
+          // le formulaire public est web-only). Note : on pourrait aussi afficher
+          // une feuille modale "Ouvrir le formulaire public ?" avec le lien.
+          if (__DEV__) dlog("deeplink", `form/${parsed.slug} — ouverture externe`);
+          // Pour MVP, on ne fait rien ici : le formulaire public n'est pas
+          // encore implémenté en RN. Le lien https://kamforms.com/f/[slug]
+          // reste la voie d'accès publique.
+          break;
+        case "unknown":
+          if (__DEV__) dlog("deeplink", `URL non reconnue: ${parsed.raw}`);
+          break;
+      }
+    };
+
+    // Vérifier les liens en attente (app ouverte via un tap sur le lien)
+    Linking.getInitialURL().then((url) => {
+      if (url) handleUrl(url);
+    }).catch(() => { /* silencieux */ });
+
+    // S'abonner aux liens entrants pendant que l'app tourne
+    const sub = Linking.addEventListener("url", ({ url }) => handleUrl(url));
+    return () => sub.remove();
+  }, [isSignedIn, router]);
 
   // Chargement Clerk : écran de marque au lieu d'une page blanche
   if (!isLoaded) {

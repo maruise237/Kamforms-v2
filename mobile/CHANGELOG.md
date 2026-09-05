@@ -4,6 +4,65 @@ Toutes les modifications notables du projet Kamforms Mobile seront documentées 
 
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/), et ce projet adhère au [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] — 2026-09-05
+
+### ✨ Ajouts (Phase 3 — Features MVP)
+
+- **Phase 3.5 — Export CSV des réponses** : nouveau bouton « Exporter » en haut de l'onglet Réponses. Au tap, ouverture d'une modale listant tous les formulaires avec leur nombre de réponses. Au choix, le CSV est téléchargé depuis l'API, écrit dans `FileSystem.cacheDirectory` puis ouvert via le menu de partage natif (`Sharing.shareAsync`). Le bouton est désactivé en mode hors-ligne.
+  - Nouveau fichier `src/lib/csvExport.ts` : helper complet (download → base64 → write → share) avec gestion d'erreurs et cache cleanup.
+  - Nouvelle fonction `exportSubmissionsCsv()` dans `src/lib/api.ts`.
+  - `(tabs)/reponses.tsx` : ajout d'un header avec bouton Exporter + modale de sélection de formulaire.
+  - Dépendances ajoutées : `expo-file-system`, `expo-sharing`.
+
+- **Phase 3.6 — Mode offline-first avec bandeau** : nouveau composant `<OfflineBanner />` affiché automatiquement en haut de chaque écran quand l'app détecte l'absence de connexion internet. Le bandeau informe l'utilisateur que les données affichées proviennent du cache et que les actions mutantes sont désactivées. Le bouton d'export CSV est aussi désactivé en hors-ligne.
+  - Nouveau hook `src/lib/useOffline.ts` : écoute `@react-native-community/netinfo` avec fallback gracieux (online) si la lib n'est pas installée. Retourne `true` si `isConnected === false` ou `isInternetReachable === false`.
+  - Nouveau composant `src/components/OfflineBanner.tsx` : bandeau discret (couleur `spark` / amber, icône `WifiOff`), `paddingVertical` ajustable via prop `compact`.
+  - `(tabs)/index.tsx` (Formulaires) et `(tabs)/reponses.tsx` (Réponses) : `<OfflineBanner />` inséré en haut.
+  - Dépendance ajoutée : `@react-native-community/netinfo`.
+
+- **Phase 3.7 — Deep linking kamforms://** : gestion des liens entrants `kamforms://...` pour permettre à un utilisateur d'ouvrir directement l'éditeur d'un formulaire ou l'onglet Réponses depuis un push, un QR code, ou un email.
+  - Nouveau fichier `src/lib/deepLinking.ts` : parser `parseKamformsLink()` + helpers `buildFormDeepLink()` / `buildFormulaireDeepLink()`.
+  - Schémas supportés :
+    - `kamforms://formulaire/[id]` → ouvre l'éditeur du formulaire
+    - `kamforms://reponses` → ouvre l'onglet Réponses
+    - `kamforms://reponses/[formId]` → ouvre l'onglet Réponses (filtrage TODO V1.1)
+    - `kamforms://form/[slug]` → URL publique (laisse l'utilisateur ouvrir dans le navigateur, pour MVP)
+    - `kamforms://oauth-native-callback` → déjà géré par Clerk (ignoré)
+  - `_layout.tsx` : ajout d'un `useEffect` qui écoute `Linking.getInitialURL()` + `Linking.addEventListener("url")` et route vers le bon écran. Ne s'active que si l'utilisateur est authentifié.
+  - Dépendance déjà présente : `expo-linking` (~7.0.5).
+
+### 🔧 Améliorations
+
+- `(tabs)/reponses.tsx` : `useQuery` des soumissions enrichi avec `formId` sur chaque `SubmissionRow` pour permettre l'export.
+- `package.json` : ajout de 3 scripts npm (`build:preview:android`, `build:production:*`, `submit:*`, `update`).
+- `_layout.tsx` : `Linking` ajouté aux imports.
+
+### 📋 Ce qui existait déjà et a été préservé
+
+L'analyse fine du code source a révélé que les éléments suivants étaient déjà implémentés dans `formulaire/[id]/index.tsx` (2314 lignes) — aucune nouvelle implémentation n'était nécessaire :
+
+- **Phase 3.2 — Éditeur de formulaire mobile complet** : 5 onglets (Aperçu, Apparence, Fin, Paramètres, Statistiques) déjà présents. Édition du titre, description, schéma de champs, ajout/suppression/réordonnancement via `ArrowUp`/`ArrowDown`/`Trash2`, personnalisation du thème (couleur, bannière, position), configuration de l'ending (message, redirection, confetti), paramètres de notification (mode, WhatsApp, email, max submissions, expiration). Tout est fonctionnel et appelle `PATCH /api/forms/[id]`.
+- **Phase 3.4 — Analytics par formulaire** : l'onglet « Statistiques » (`TabStatistiques` composant, lignes 1602-2314) affiche déjà les cartes de vues / visiteurs uniques / taux de complétion / nombre de soumissions, la répartition par pays et par villes. Aucune librairie de chart externe nécessaire — les visualisations sont en vues natives RN, ce qui évite d'embarquer une dépendance de 200 Ko.
+- **Phase 3.3 — Synchronisation des types de champs** : `FormField` dans `src/lib/api.ts` et `FIELD_TYPES` dans `formulaire/[id]/editer.tsx` listent les mêmes 10 types (text, email, phone, number, textarea, select, radio, checkbox, date, rating), cohérents avec la validation backend.
+
+### 📊 Gains Phase 3
+
+| Fonctionnalité | Statut | Effort constaté |
+|---------------|--------|-----------------|
+| Éditeur formulaire mobile | ✅ Déjà existant (2314 lignes) | Préexistant |
+| Analytics par formulaire | ✅ Déjà existant (712 lignes) | Préexistant |
+| Export CSV | ✅ Implémenté Phase 3.5 | ~1 jour |
+| Mode offline-first | ✅ Implémenté Phase 3.6 | ~0,5 jour |
+| Deep linking kamforms:// | ✅ Implémenté Phase 3.7 | ~0,5 jour |
+
+### 🔗 Dépendances ajoutées (Phase 3)
+
+| Package | Version | Raison |
+|---------|---------|--------|
+| `@react-native-community/netinfo` | 11.4.1 | Détection offline pour OfflineBanner |
+| `expo-file-system` | ~18.1.11 | Écriture du CSV en cache avant partage |
+| `expo-sharing` | ~13.0.1 | Menu de partage natif iOS/Android |
+
 ## [1.0.0] — 2026-09-05
 
 Version initiale optimisée selon le plan d'action du rapport d'analyse. Cette version ne contient pas encore de features fonctionnelles nouvelles, mais applique toutes les optimisations de Phase 1 (allègement APK), Phase 2 (performance), Phase 3.1 (account deletion) et Phase 4.1 (Sentry).

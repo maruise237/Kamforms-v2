@@ -173,6 +173,37 @@ export const listSubmissions = (token: string, formId: string, limit = 10) =>
 export const clearSubmissions = (token: string, formId: string) =>
   apiFetch<null>(`/api/forms/${formId}/submissions`, { token, method: "DELETE" });
 
+/**
+ * Export CSV des soumissions (Phase 3.5)
+ *
+ * L'endpoint /api/forms/[id]/submissions/export renvoie un blob text/csv.
+ * On le récupère en mode blob (pas JSON), puis on le sauvegarde via
+ * expo-file-system + expo-sharing pour proposer le partage natif.
+ *
+ * ⚠️ Requiert : npx expo install expo-file-system expo-sharing
+ */
+export async function exportSubmissionsCsv(
+  token: string,
+  formId: string
+): Promise<{ blob: Blob; filename: string }> {
+  const res = await fetch(`${API_URL}/api/forms/${formId}/submissions/export`, {
+    headers: { authorization: `Bearer ${token}` },
+  });
+  if (!res.ok) {
+    let msg = `Erreur ${res.status}`;
+    try {
+      const json = await res.json();
+      if (json?.error) msg = String(json.error);
+    } catch { /* ignore */ }
+    throw new Error(msg);
+  }
+  const cd = res.headers.get("content-disposition") ?? "";
+  const match = cd.match(/filename="?([^";]+)"?/);
+  const filename = match?.[1] ?? `kamforms-export-${formId}.csv`;
+  const blob = await res.blob();
+  return { blob, filename };
+}
+
 // ─── Endpoints Generation & Import ────────────────────────
 
 export const generateForm = (token: string, prompt: string, formType?: "single" | "multi") =>
